@@ -4,14 +4,7 @@ Made is a lightweight terminal text editor that has powerful development tools b
 
 ## Features
 
-- Treesitter
-- LSP support
-- Git integration
-- Syntax highlighting
-- Themes
-- Vim keybindings
-- Multi-language support
-- Direnv integration
+- Modal editing
 
 ## Installation
 
@@ -22,5 +15,5 @@ cargo install made
 ## Usage
 
 ```sh
-made
+made <path>
 ```
