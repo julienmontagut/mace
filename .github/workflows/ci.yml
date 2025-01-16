@@ -33,7 +33,7 @@ jobs:
       run: cargo test --verbose
 
   publish:
-    name: Tag and Publish
+    name: Publish and Tag
     needs: [test]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -64,6 +64,12 @@ jobs:
           echo "should_publish=true" >> $GITHUB_OUTPUT
           echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
         fi
+    
+    - name: Publish to crates.io
+      if: steps.check_version.outputs.should_publish == 'true'
+      run: cargo publish
+      env:
+        CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
 
     - name: Create and push tag
       if: steps.check_version.outputs.should_publish == 'true'
@@ -71,10 +77,4 @@ jobs:
         git config user.name "Julien Montagut"
         git config user.email "_@julienmontagut.com"
         git tag -a "v${{ steps.check_version.outputs.version }}" -m "Release v${{ steps.check_version.outputs.version }}"
-        git push origin "v${{ steps.check_version.outputs.version }}"
-    
-    - name: Publish to crates.io
-      if: steps.check_version.outputs.should_publish == 'true'
-      run: cargo publish
-      env:
-        CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }} 
+        git push origin "v${{ steps.check_version.outputs.version }}" 
