@@ -1,4 +1,4 @@
-# Mace 🪓 - A modern accessible development environment
+# Mace 🔨 - A modern accessible development environment
 
 Mace is a lightweight terminal text editor that has powerful development tools built in.
 
