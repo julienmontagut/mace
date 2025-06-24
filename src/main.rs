@@ -26,7 +26,7 @@ fn main() -> io::Result<()> {
     let matches = Command::new(APP_NAME)
         .version(APP_VERSION)
         .author("Julien Montagut <_@julienmontagut.com>")
-        .about("Made is a modern accessible development environment")
+        .about("Mace is a modern accessible development environment")
         .args(&[
             // arg!(-c --config <PATH> "Path to the config directory"),
             arg!([PATH] "A file or directory to open")

@@ -1,21 +1,27 @@
 [package]
-name = "made"
-description = "Made is a modern accessible development environment"
+name = "mace-editor"
+description = "Mace is a modern accessible development environment"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
 authors = ["Julien Montagut <_@julienmontagut.com>"]
-repository = "https://github.com/julienmontagut/made"
-documentation = "https://github.com/julienmontagut/made#readme"
-homepage = "https://github.com/julienmontagut/made"
+repository = "https://github.com/julienmontagut/mace"
+documentation = "https://github.com/julienmontagut/mace#readme"
+homepage = "https://github.com/julienmontagut/mace"
 keywords = ["editor", "terminal"]
 categories = ["text-editors", "development-tools", "command-line-utilities"]
 readme = "README.md"
 
+# Make the bin and namespace be `mace`
+[[bin]]
+name = "mace"
+path = "src/main.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = "4.5.26"
+clap = { version = "4.5.26", features = ["derive"] }
+figment = { version = "0.10.9", features = ["env", "toml"] }
 toml = "0.8.19"
 ratatui = "0.29.0"
 crossterm = "0.28.1"

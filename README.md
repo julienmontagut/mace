@@ -1,6 +1,6 @@
-# Made 🖐️ - A modern accessible development environment
+# Mace 🪓 - A modern accessible development environment
 
-Made is a lightweight terminal text editor that has powerful development tools built in.
+Mace is a lightweight terminal text editor that has powerful development tools built in.
 
 ## Features
 
@@ -9,11 +9,11 @@ Made is a lightweight terminal text editor that has powerful development tools b
 ## Installation
 
 ```sh
-cargo install made
+cargo install mace-editor
 ```
 
 ## Usage
 
 ```sh
-made <path>
+mace <path>
 ```
