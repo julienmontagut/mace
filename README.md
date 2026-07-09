@@ -1,6 +1,9 @@
-# Mace 🔨 - A modern accessible code editor
+# Mace 🔨
 
-Mace is a lightweight terminal text editor that has powerful development tools built in.
+> Smash it with a modern accessible code editor
+
+Mace is a lightweight terminal text editor that comes batteries included.
+
 
 ## Features
 
