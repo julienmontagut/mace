@@ -1,0 +1,25 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: centos-10
+    steps:
+      - name: Check out
+        run: |
+          git clone --quiet https://oauth2:${{ forgejo.token }}@forge.julienmontagut.com/${{ forgejo.repository }} .
+          git checkout --quiet ${{ forgejo.sha }}
+      - name: Publish and tag
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: |
+          version=$(sed -n 's/^version = "\(.*\)"$/\1/p' Cargo.toml | head -1)
+          if curl -sf -o /dev/null -A forge.julienmontagut.com "https://crates.io/api/v1/crates/mace-editor/$version"; then
+            echo "mace-editor $version already on crates.io"
+            exit 0
+          fi
+          podman run --rm -v "$PWD:/src:Z" -w /src -e CARGO_REGISTRY_TOKEN docker.io/library/rust:1.96.0 sh -c 'cargo test && cargo publish'
+          git -c user.name="Julien Montagut" -c user.email="_@julienmontagut.com" tag -a "v$version" -m "Release v$version"
+          git push --quiet origin "v$version"
